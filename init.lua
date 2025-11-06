@@ -101,11 +101,15 @@ lazy.setup({
         },
         {
             'stevearc/oil.nvim',
-            opts = {},
             dependencies = { 'nvim-tree/nvim-web-devicons' },
             config = function()
-                require("oil").setup()
-            end
+                require("oil").setup({
+                    default_file_explorer = true,
+                    view_options = {
+                        show_hidden = true,
+                    }
+                })
+            end,
     	},
         { 
             'petertriho/nvim-scrollbar',
@@ -205,8 +209,8 @@ lazy.setup({
 -- Setup custom highlighting on nvim start.
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
-        vim.cmd.colorscheme("gruvbox")
-        -- vim.cmd.colorscheme("kanagawa")
+        -- vim.cmd.colorscheme("gruvbox")
+        vim.cmd.colorscheme("kanagawa")
 
         vim.cmd.highlight("clear SignColumn")
         vim.cmd.highlight("LineNr guibg=NONE")
