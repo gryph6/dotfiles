@@ -192,14 +192,15 @@ lazy.setup({
 
                 local blink_capabilities = blink.get_lsp_capabilities()
                 
-                vim.lsp.config("*", {
-                    capabilities = blink_capabilities 
+                vim.lsp.config("gopls", {
+                    capabilities = blink_capabilities,
+                    cmd = { "gopls" },
+                    filetypes = { "go" },
+                    root_markers = { "go.mod" }
                 })
 
                 vim.lsp.enable({
-                    "clangd",
-                    "pyright",
-                    "rust_analyzer"
+                    "gopls"
                 })
             end
         }
