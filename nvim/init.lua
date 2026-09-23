@@ -301,8 +301,8 @@ lazy.setup({
                     cmd = { "clangd", "--background-index" },
                     filetypes = { "c", "cpp" },
                     root_markers = { "compile_commands.json", ".clangd", ".git" }
-	    	})
-                
+                })
+
                 vim.lsp.config("gopls", {
                     capabilities = blink_capabilities,
                     cmd = { "gopls" },
