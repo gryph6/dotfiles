@@ -33,6 +33,10 @@ vim.opt.updatetime = 50
 
 vim.opt.signcolumn = "yes:1" 
 
+-- Show trailing whitespace as a dim bullet.
+vim.opt.list = true
+vim.opt.listchars:append({ trail = "·" })
+
 -- Use System Clipboard
 vim.opt.clipboard = 'unnamedplus'
 
@@ -358,6 +362,7 @@ lazy.setup({
             event = 'VeryLazy',
             ft = { 'org' },
             config = function()
+                require('orgmode.utils.treesitter.install').compilers = { 'zig' }
                 require('orgmode').setup({
                     org_agenda_files = '~/orgfiles/**/*',
                     org_default_notes_file = '~/orgfiles/refile.org',
@@ -401,6 +406,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
         vim.cmd.highlight("clear SignColumn")
         vim.cmd.highlight("LineNr guibg=NONE")
+        vim.api.nvim_set_hl(0, "Whitespace", { link = "DiagnosticError" })
 
         vim.cmd.highlight("clear DiagnosticSignError")
         vim.cmd.highlight("link DiagnosticSignError DiagnosticError")
@@ -425,10 +431,8 @@ vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
 -- 80 char limit in C files
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {
-        "C:/Users/griffinS/git/Xbox.AccessoriesFirmware/src/XboxGameControllerDriver/*.c",
-        "C:/Users/griffinS/git/Xbox.AccessoriesFirmware/src/XboxGameControllerDriver/*.h",
-        "C:/os/src/gamecore/xbc/net/xvn/xvnpf/*.c",
-        "C:/os/src/gamecore/xbc/net/xvn/xvnpf/*.h"
+        "*.c",
+        "*.h",
     },
-    command = "match @comment.error /\\%80v.\\+/",
+    command = "match @comment.error /\\%81v.\\+/",
 })
