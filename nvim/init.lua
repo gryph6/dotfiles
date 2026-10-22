@@ -118,6 +118,7 @@ lazy.setup({
                 explorer = {
                     view_mode = 'tree',
                     focus_on_select = true,
+                    auto_refresh = false,
                 },
             },
             keys = {
